@@ -1,5 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
+<<<<<<< HEAD
 import { on } from 'node:cluster';
+=======
+>>>>>>> 7e6a4c7 (services module script)
 
 /**
  * Read environment variables from file.
@@ -21,6 +24,7 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
+<<<<<<< HEAD
   //workers: process.env.CI ? 1 : undefined,
   workers : 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
@@ -38,12 +42,25 @@ export default defineConfig({
    headless : false,
     storageState : "auth.json",
     
+=======
+  workers: process.env.CI ? 1 : undefined,
+  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
+  reporter: 'html',
+  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  use: {
+    /* Base URL to use in actions like `await page.goto('')`. */
+    // baseURL: 'http://localhost:3000',
+
+    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    trace: 'on-first-retry',
+>>>>>>> 7e6a4c7 (services module script)
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
       name: 'chromium',
+<<<<<<< HEAD
      use :{
       browserName : "chromium",
       video : "on",
@@ -65,6 +82,20 @@ export default defineConfig({
     //   }
 
     // },
+=======
+      use: { ...devices['Desktop Chrome'] },
+    },
+
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+    },
+
+    /*{
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
+    }*/
+>>>>>>> 7e6a4c7 (services module script)
 
     /* Test against mobile viewports. */
     // {
