@@ -9,7 +9,6 @@ export const test = baseTest.extend<MyFixtures>({
   defaultPage: async ({ page }, use) => {    //This is the function that runs to create the fixture:
     
     await page.goto(data.prod_serv_url);
-
     //  Handle guide tour if it appears
     const closeTourBtn = page.locator('#tg-dialog-close-btn'); 
     if (await closeTourBtn.isVisible()) {
@@ -19,3 +18,4 @@ export const test = baseTest.extend<MyFixtures>({
     await use(page);
   },
 });
+
