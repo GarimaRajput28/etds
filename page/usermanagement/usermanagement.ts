@@ -59,11 +59,8 @@ class usermanagement {
         //handling popup 
 
         const dialogbox = await (this.clickpopup).waitFor({state:"visible", timeout:3000}).then(()=>true).catch(()=>false)
-        if (dialogbox){
-         await this.clickpopup.click();
-        }
+        if (dialogbox) await this.clickpopup.click();
         await expect(message).toBeVisible({timeout: 10000});
-       
     }
 
     

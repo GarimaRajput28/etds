@@ -1,7 +1,6 @@
 import { test,expect } from "@playwright/test";
 import { usermanagement } from "../../page/usermanagement/usermanagement";
 import { etdsconfig } from "../../ETDS.config";
-import { waitForDebugger } from "inspector";
 
 test('@Sanity Downloading the existing user',async ({page}) => {
     await page.goto(`/employees-corner`) 
