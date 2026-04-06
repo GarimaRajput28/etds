@@ -34,9 +34,10 @@ export class ActPage {
 
 
     async goto() {
-        await this.page.goto('/income-tax-act-1961', { waitUntil: 'networkidle' });
-        await expect(this.incomeTaxHeading).toBeVisible();
-    }
+        await this.page.goto('/income-tax-act-1961', { waitUntil: 'domcontentloaded' });
+        await this.incomeTaxHeading.waitFor({ state: 'visible', timeout: 15000 });
+
+     }
 
 
 
