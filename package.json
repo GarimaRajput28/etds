@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "name": "y",
   "version": "1.0.0",
   "main": "index.js",
@@ -18,18 +17,5 @@
     "@playwright/test": "^1.44.0",
     "@types/node": "^25.5.0",
     "typescript": "^6.0.2"
-=======
-  "name": "etds",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {},
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@playwright/test": "^1.58.2",
-    "@types/node": "^25.5.0"
->>>>>>> 7e6a4c7 (services module script)
   }
 }
