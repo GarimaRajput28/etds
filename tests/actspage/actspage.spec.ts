@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { ActPage } from '../page/actPage';
+import { ActPage } from '../../page/actpage/actPage';
 
 
 test('actPage', async ({ page }) => {

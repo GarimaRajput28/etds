@@ -1,5 +1,5 @@
-import { test, expect } from '../fixtures/popuphandling.fixtures';
-import { InfographicalVideoPage } from '../page/infographicalVideo';
+import { test, expect } from '../../fixtures/popuphandling.fixtures';
+import { InfographicalVideoPage } from '../../page/infographicalVideo/infographicalVideo';
 
 test('Redirection to infographical page from Homepage', async ({ homePage, page }) => {
 
