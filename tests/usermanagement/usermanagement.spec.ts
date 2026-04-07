@@ -1,5 +1,5 @@
 import { test,expect } from "@playwright/test";
-import { usermanagement } from "../../page/usermanagement/usermanagement";
+import { usermanagement } from "../../pages/usermanagement/usermanagement";
 import { etdsconfig } from "../../ETDS.config";
 
 test('@Sanity Downloading the existing user',async ({page}) => {
