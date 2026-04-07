@@ -1,4 +1,4 @@
-import { test, expect } from '../../fixtures/popuphandling.fixtures';
+import { test, expect } from '../../Fixtures/popuphandling.fixtures';
 
 test.describe('Home Page - Top Menu Validations', () => {
 

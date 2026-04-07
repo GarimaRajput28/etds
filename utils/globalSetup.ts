@@ -1,6 +1,6 @@
 import { chromium, expect, Page } from "@playwright/test";
 import { etdsconfig } from "../ETDS.config.ts";
-import { Registration } from "../pages/login/login.js";  // ✅ use import, not require
+import { Registration } from "../page/login/login.js";  // ✅ use import, not require
 
 async function globalSetup() {
   const browser = await chromium.launch({headless:true});

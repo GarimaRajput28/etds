@@ -1,5 +1,5 @@
 import { Page,test } from "@playwright/test";
-import { Bulkupload } from "../../pages/usermanagement/Bulkupload";
+import { Bulkupload } from "../../page/usermanagement/Bulkupload";
 
 test("@Sanity sending the bulk emails",async({page})=>{
     const bulkemail = new Bulkupload (page);
