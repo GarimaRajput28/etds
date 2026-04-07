@@ -9,9 +9,19 @@ export class HomePage {
     readonly page: Page;
     readonly header: Locator;
     readonly closeTourBtn: Locator;
-    readonly aboutUsMenu: Locator;
-    readonly infographicalBttn: Locator;
     readonly popupContinueBtn: Locator;
+
+    //header locators
+    readonly aboutUsMenu: Locator;
+    readonly taxlawsMenu: Locator;
+    readonly taxibformationMenu: Locator;
+    readonly taxeservicesMenu: Locator;
+
+
+    //Explore Menu locators
+    readonly infographicalBttn: Locator;
+    readonly importantlinksBttn: Locator;
+
 
 
 
@@ -20,7 +30,12 @@ export class HomePage {
         this.header = page.getByRole('banner');
         this.closeTourBtn = page.getByRole('button', { name: 'Close Tour' });
         this.aboutUsMenu = page.getByRole('menuitem', { name: 'About Us' });
+        this.taxlawsMenu = page.getByRole('menuitem', { name: 'Tax Laws & Rules' });
+        this.taxibformationMenu = page.getByRole('menuitem', { name: 'Tax Information & Services' });
+        this.taxeservicesMenu = page.getByRole('menuitem', { name: 'Tax Services' });
+
         this.infographicalBttn = page.locator('span').filter({ hasText: 'Infographical Video' }).first();
+        this.importantlinksBttn = page.getByText('Important Links', { exact: true });
         this.popupContinueBtn = page.getByRole('button', { name: 'Continue' });
 
 

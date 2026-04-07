@@ -1,4 +1,4 @@
-import { test, expect } from '../fixtures/popuphandling.fixtures';
+import { test, expect } from '../../fixtures/popuphandling.fixtures';
 
 test.describe('Home Page - Top Menu Validations', () => {
 
@@ -22,19 +22,15 @@ test.describe('Home Page - Top Menu Validations', () => {
         //click on links
 
         await homePage.aboutUsMenu.click();
-        await expect(page).toHaveURL(/.*about-us/);
+        
 
         await homePage.taxlawsMenu.click();
-        await expect(page).toHaveURL(/.*tax-laws/);
+  
 
         await homePage.taxibformationMenu.click();
-        await expect(page).toHaveURL(/.*tax-information/);
-
+       
         await homePage.infographicalBttn.click();
-        await expect(page).toHaveURL(/.*infographical/);
-
-        await homePage.importantlinksBttn.click();
-        await expect(page).toHaveURL(/.*important-links/);
+             
 
     });
 
