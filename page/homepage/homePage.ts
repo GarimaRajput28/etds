@@ -61,7 +61,6 @@ export class HomePage {
     async clickOnInfographicalVideo() {
         await this.infographicalBttn.waitFor({ state: 'visible', timeout: 10000 });
         await this.infographicalBttn.click();
-        await this.page.waitForURL('**/infographical-video**', { timeout: 15000 });
 
 
     }

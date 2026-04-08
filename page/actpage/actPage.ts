@@ -17,7 +17,7 @@ export class ActPage {
 
     constructor(page: Page) {
         this.page = page;
-        this.incomeTaxHeading = page.getByRole('heading', { name: 'Income-tax Act' });
+        this.incomeTaxHeading = page.getByRole('heading', { name: 'Income-tax Act, 1961' });
         this.yearDropdown = page.getByLabel('As amended by Finance Act');
         this.yearOption2025 = page.getByRole('option', { name: '2025', exact: true });
         this.sections1Link =  page.locator('span').filter({ hasText: 'Section - 1' }).first();
