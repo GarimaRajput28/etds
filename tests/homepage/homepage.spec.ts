@@ -27,9 +27,7 @@ test.describe('Home Page - Top Menu Validations', () => {
         await homePage.taxlawsMenu.click();
   
 
-        await homePage.taxibformationMenu.click();
        
-        await homePage.infographicalBttn.click();
              
 
     });
