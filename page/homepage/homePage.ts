@@ -7,10 +7,17 @@ export class HomePage {
 
 
     readonly page: Page;
-    readonly header: Locator;
+    //readonly header: Locator;
     readonly closeTourBtn: Locator;
     readonly popupContinueBtn: Locator;
+
+
+    // banner 
+    readonly banner: Locator;
+
     readonly announcemnt: Locator;
+
+
 
     //header locators
     readonly aboutUsMenu: Locator;
@@ -28,7 +35,7 @@ export class HomePage {
 
     constructor(page: Page) {
         this.page = page;
-        this.header = page.getByRole('banner');
+        this.banner = page.getByRole('region', { name: 'Banner' });
 
         // guided tour locator
         this.closeTourBtn = page.getByRole('button', { name: 'Close Tour' });
