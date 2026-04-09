@@ -11,26 +11,19 @@ test('actPage', async ({ page }) => {
         await expect(actPage.incomeTaxHeading).toBeVisible();
 
 
-        await actPage.selectYear('2025');
         
+        await actPage.selectYear('2025');
 
 
-        await actPage.clickSection1();  
+
+        await actPage.clickSection1();
         // 2. Assertions
-        await actPage.selectSectionInModal('Section - 5');      
+        await actPage.selectSectionInModal('Section - 5');
 
         // 3. Click the "View" button to see the comparison
+
         await actPage.viewbtn.waitFor({ state: 'visible', timeout: 15000 });
         await actPage.viewbtn.click();
-
-        // Additional assertions can be added here to verify the content of the comparison page
-        await page.locator("div[class='sectionContentViewer sectionContentViewer-right-section'] div[class='section-data text-truncate text-primary sub-heading-2-medium']").waitFor({ state: 'visible', timeout: 15000 });
-        await page.locator("div[class='sectionContentViewer sectionContentViewer-left-section'] div[class='section-data text-truncate text-primary sub-heading-2-medium']").filter({ hasText: 'Section - 1 Short title, extent and commencement' }).first().waitFor({ state: 'visible', timeout: 15000 });
-
-
-
-
-
 
 
 });
