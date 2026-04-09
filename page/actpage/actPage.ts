@@ -38,7 +38,7 @@ export class ActPage {
     async goto() {
         await this.page.goto('/income-tax-act-1961', { waitUntil: 'domcontentloaded' });
         await this.incomeTaxHeading.waitFor({ state: 'visible', timeout: 15000 });
-        await this.page.pause();
+        
 
      }
 

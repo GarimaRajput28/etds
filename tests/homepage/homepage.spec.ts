@@ -6,6 +6,7 @@ test.describe('Home Page - Top Menu Validations', () => {
 
 
         // Assertions Header Menu
+        await expect(homePage.announcemnt).toBeVisible();
         await expect(homePage.aboutUsMenu).toBeVisible({ timeout: 15000 });
         await expect(homePage.taxlawsMenu).toBeVisible({ timeout: 15000 });
         await expect(homePage.taxibformationMenu).toBeVisible({ timeout: 15000 });
