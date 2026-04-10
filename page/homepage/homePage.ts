@@ -35,6 +35,8 @@ export class HomePage {
 
     constructor(page: Page) {
         this.page = page;
+
+        //banner locator
         this.banner = page.getByRole('region', { name: 'Banner' });
 
         // guided tour locator
@@ -52,7 +54,6 @@ export class HomePage {
 
 
         //Explore Menu locators
-
         this.infographicalBttn = page.locator('span').filter({ hasText: 'Infographical Video' }).first();
         this.importantlinksBttn = page.getByText('Important Links', { exact: true });
         this.popupContinueBtn = page.getByRole('button', { name: 'Continue' });
