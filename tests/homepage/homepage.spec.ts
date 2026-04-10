@@ -16,6 +16,10 @@ test.describe('Home Page - Top Menu Validations', () => {
         await expect(homePage.banner).toBeVisible({ timeout: 15000 });
 
 
+        //face card assertions
+        await expect(homePage.faceCard1).toBeVisible({ timeout: 15000 });
+
+
         
 
 

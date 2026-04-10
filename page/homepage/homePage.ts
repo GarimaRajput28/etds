@@ -31,6 +31,8 @@ export class HomePage {
     readonly importantlinksBttn: Locator;
 
 
+    //Face card locators
+    readonly faceCard1: Locator;
 
 
     constructor(page: Page) {
@@ -55,8 +57,14 @@ export class HomePage {
 
         //Explore Menu locators
         this.infographicalBttn = page.locator('span').filter({ hasText: 'Infographical Video' }).first();
-        this.importantlinksBttn = page.getByText('Important Links', { exact: true });
+        this.importantlinksBttn = page.getByRole('button', { name: 'Important Links' });
         this.popupContinueBtn = page.getByRole('button', { name: 'Continue' });
+
+
+
+        //Face card 
+        this.faceCard1 = page.locator('div.card-flip').getByTitle('Income-tax Provisions').first();
+
 
 
 
