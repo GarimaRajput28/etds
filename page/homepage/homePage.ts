@@ -8,6 +8,9 @@ export class HomePage {
 
     readonly page: Page;
     //readonly header: Locator;
+
+
+    readonly tourDialog: Locator;
     readonly closeTourBtn: Locator;
     readonly popupContinueBtn: Locator;
 
@@ -43,10 +46,15 @@ export class HomePage {
 
         // guided tour locator
         this.closeTourBtn = page.getByRole('button', { name: 'Close Tour' });
+        
+        
+        this.tourDialog = page.locator('div.tg-dialog.animate-position');
+
+        444
 
 
         //Announcemnt popup locator
-        this.announcemnt = page.locator('div.etds-prompters-icon-wrapper:visible')
+        this.announcemnt = page.locator("//etds-prompters[@announcementspages='/home:home-page-announcements,/employees-corner:kms-home-page-announcements']//div[@class='etds-prompters-icon-wrapper']//*[name()='svg']")
 
         //header menu locators
         this.aboutUsMenu = page.getByRole('menuitem', { name: 'About Us' });
@@ -63,7 +71,10 @@ export class HomePage {
 
 
         //Face card 
-        this.faceCard1 = page.locator('div.card-flip').getByTitle('Income-tax Provisions').first();
+        //this.faceCard1 = page.locator('div.card__face.card__face--front').getByTitle('Income-tax Provisions');
+        this.faceCard1 = page.locator('div.card__face.card__face--front').getByRole('heading', { name: 'Income-tax Provisions', exact: true });
+
+
 
 
 
@@ -82,12 +93,20 @@ export class HomePage {
 
 
     async handleTour() {
-        // Wait for the "Close Tour" button to appear and click it if it does
-        if (await this.closeTourBtn.isVisible({ timeout: 5000 })) {
+        try {
+            //  Wait for Close Tour button to appear
+            await this.closeTourBtn.waitFor({ state: 'visible', timeout: 8000 });
             await this.closeTourBtn.click();
-            
+
+            // Wait for the actual tour dialog to close (not tg-dialog)
+            await this.page.getByRole('dialog')
+                .filter({ hasText: 'Tax Information and Services' })
+                .waitFor({ state: 'hidden', timeout: 5000 });
+        } catch {
+            // Tour not present — continue silently
         }
     }
+
 
 
     async clickOnInfographicalVideo() {
