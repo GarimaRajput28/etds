@@ -7,7 +7,7 @@
     "module": "commonjs",
     "target": "ES2020",
     "lib": [
-      "ES2020"
+      "ES2020", "DOM"
     ],
     // Node.js types (required for Playwright)
     "types": [

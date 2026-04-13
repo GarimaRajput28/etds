@@ -18,9 +18,18 @@ test.describe('Home Page - Top Menu Validations', () => {
 
         //face card assertions
         await expect(homePage.faceCard1).toBeVisible({ timeout: 15000 });
+        await homePage.hoverFaceCard(homePage.faceCard1);
+
+        await expect(homePage.faceCard2).toBeVisible({ timeout: 15000 });
+        await homePage.hoverFaceCard(homePage.faceCard2);
 
 
-        
+        await expect(homePage.faceCard5).toBeVisible({ timeout: 15000 });
+
+
+
+
+
 
 
     });
@@ -41,14 +50,14 @@ test.describe('Home Page - Top Menu Validations', () => {
 
     });
 
-        test('@full testing link redirection testing', async ({ homePage, page }) => {
-    
-            await homePage.aboutUsMenu.click();
-    
-            await homePage.taxlawsMenu.click();
-    
-    
-    
-    
-        });
+    test('@full testing link redirection testing', async ({ homePage, page }) => {
+
+        await homePage.aboutUsMenu.click();
+
+        await homePage.taxlawsMenu.click();
+
+
+
+
     });
+});

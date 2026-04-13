@@ -1,33 +1,20 @@
 import { Page, Locator } from '@playwright/test';
 
 export class HomePage {
-    clickInfographicalVideo() {
-        throw new Error('Method not implemented.');
-    }
-
-
     readonly page: Page;
-    //readonly header: Locator;
-
-
     readonly tourDialog: Locator;
     readonly closeTourBtn: Locator;
     readonly popupContinueBtn: Locator;
-
-
     // banner 
     readonly banner: Locator;
-
+    //Announcement popup
     readonly announcemnt: Locator;
-
-
 
     //header locators
     readonly aboutUsMenu: Locator;
     readonly taxlawsMenu: Locator;
     readonly taxibformationMenu: Locator;
     readonly taxeservicesMenu: Locator;
-
 
     //Explore Menu locators
     readonly infographicalBttn: Locator;
@@ -36,6 +23,8 @@ export class HomePage {
 
     //Face card locators
     readonly faceCard1: Locator;
+    readonly faceCard2: Locator;
+    readonly faceCard5: Locator;
 
 
     constructor(page: Page) {
@@ -46,11 +35,9 @@ export class HomePage {
 
         // guided tour locator
         this.closeTourBtn = page.getByRole('button', { name: 'Close Tour' });
-        
-        
         this.tourDialog = page.locator('div.tg-dialog.animate-position');
 
-        444
+
 
 
         //Announcemnt popup locator
@@ -65,21 +52,19 @@ export class HomePage {
 
         //Explore Menu locators
         this.infographicalBttn = page.locator('span').filter({ hasText: 'Infographical Video' }).first();
-        this.importantlinksBttn = page.getByRole('button', { name: 'Important Links' });
+        this.importantlinksBttn = page.getByRole('navigation', { name: 'Explore' }).getByRole('button', { name: 'Important Links', exact: true });
         this.popupContinueBtn = page.getByRole('button', { name: 'Continue' });
 
 
 
         //Face card 
-        //this.faceCard1 = page.locator('div.card__face.card__face--front').getByTitle('Income-tax Provisions');
-        this.faceCard1 = page.locator('div.card__face.card__face--front').getByRole('heading', { name: 'Income-tax Provisions', exact: true });
+        this.faceCard1 = page.getByRole('region', { name: 'flip card' })
+            .filter({ has: page.getByRole('heading', { name: 'Income-tax Provisions', exact: true }) });
 
+        this.faceCard2 = page.getByRole('region', { name: 'flip card' })
+            .filter({ has: page.getByRole('heading', { name: 'Circular/Notifications', exact: true }) });
 
-
-
-
-
-
+        this.faceCard5 = page.locator('div.card__face.card__face--front').getByRole('heading', { name: 'International Taxation', exact: true });
 
 
     }
@@ -107,6 +92,18 @@ export class HomePage {
         }
     }
 
+    async hoverFaceCard(card: Locator) {
+        const isFlipped = await card.evaluate(
+            (el: HTMLElement) => el.classList.contains('is-flipped')
+        );
+        if (isFlipped) {
+            await card.click();
+            await this.page.waitForTimeout(500);
+        }
+        await card.hover();
+    }
+
+
 
 
     async clickOnInfographicalVideo() {
@@ -116,10 +113,4 @@ export class HomePage {
 
     }
 
-
-
-
 }
-
-
-
