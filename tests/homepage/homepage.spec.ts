@@ -15,49 +15,38 @@ test.describe('Home Page - Top Menu Validations', () => {
         //banner is visible
         await expect(homePage.banner).toBeVisible({ timeout: 15000 });
 
-
-        //face card assertions
-        await expect(homePage.faceCard1).toBeVisible({ timeout: 15000 });
-        await homePage.hoverFaceCard(homePage.faceCard1);
-
-        await expect(homePage.faceCard2).toBeVisible({ timeout: 15000 });
-        await homePage.hoverFaceCard(homePage.faceCard2);
-
-
-        await expect(homePage.faceCard5).toBeVisible({ timeout: 15000 });
-
-
-
-
-
-
-
     });
 
 
-    test('Validate Explore menu option', async ({ homePage, page }) => {
+    //face card assertions
+    test('@Sanity validate all face cards visibility and flip', async ({ homePage }) => {
 
+        const cards = await homePage.getAllFaceCards();
 
+        // Fail fast if no cards are found at all
+        expect(cards.length).toBeGreaterThan(0);
 
-        //Explore menu assertions
+        for (const card of cards) {
+
+            // Each card should be visible before interacting
+            await expect(card).toBeVisible({ timeout: 15000 });
+
+            // Hover the card and verify it flips
+            await homePage.hoverFaceCard(card);
+            await expect(card).toHaveClass(/is-flipped/, { timeout: 5000 });
+        }
+    });
+
+    test('Validate Explore menu options', async ({ homePage }) => {
+
         await expect(homePage.infographicalBttn).toBeVisible({ timeout: 15000 });
         await expect(homePage.importantlinksBttn).toBeVisible({ timeout: 15000 });
-
-
-
-
-
-
     });
 
-    test('@full testing link redirection testing', async ({ homePage, page }) => {
+    test('@fullTesting link redirection', async ({ homePage, page }) => {
 
         await homePage.aboutUsMenu.click();
-
         await homePage.taxlawsMenu.click();
-
-
-
-
     });
+
 });

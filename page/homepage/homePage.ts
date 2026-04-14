@@ -16,15 +16,15 @@ export class HomePage {
     readonly taxibformationMenu: Locator;
     readonly taxeservicesMenu: Locator;
 
+    //search box locators
+
+
     //Explore Menu locators
     readonly infographicalBttn: Locator;
     readonly importantlinksBttn: Locator;
 
 
     //Face card locators
-    readonly faceCard1: Locator;
-    readonly faceCard2: Locator;
-    readonly faceCard5: Locator;
 
 
     constructor(page: Page) {
@@ -55,18 +55,24 @@ export class HomePage {
         this.importantlinksBttn = page.getByRole('navigation', { name: 'Explore' }).getByRole('button', { name: 'Important Links', exact: true });
         this.popupContinueBtn = page.getByRole('button', { name: 'Continue' });
 
+    }
 
+    // Returns a locator for a specific face card by its heading name
+    getFaceCard(headingName: string): Locator {
+        return this.page
+            .getByRole('region', { name: 'flip card' })
+            .filter({ has: this.page.getByRole('heading', { name: headingName, exact: true }) });
+    }
 
-        //Face card 
-        this.faceCard1 = page.getByRole('region', { name: 'flip card' })
-            .filter({ has: page.getByRole('heading', { name: 'Income-tax Provisions', exact: true }) });
-
-        this.faceCard2 = page.getByRole('region', { name: 'flip card' })
-            .filter({ has: page.getByRole('heading', { name: 'Circular/Notifications', exact: true }) });
-
-        this.faceCard5 = page.locator('div.card__face.card__face--front').getByRole('heading', { name: 'International Taxation', exact: true });
-
-
+    // Discovers all flip cards dynamically and returns them as an array of locators
+    async getAllFaceCards(): Promise<Locator[]> {
+        const allCards = this.page.getByRole('region', { name: 'flip card' });
+        const count = await allCards.count();
+        const cards: Locator[] = [];
+        for (let i = 0; i < count; i++) {
+            cards.push(allCards.nth(i));
+        }
+        return cards;
     }
 
     async goto() {
@@ -98,7 +104,7 @@ export class HomePage {
         );
         if (isFlipped) {
             await card.click();
-            await this.page.waitForTimeout(500);
+            await card.waitFor({ state: 'visible' });
         }
         await card.hover();
     }
