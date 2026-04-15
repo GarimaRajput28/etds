@@ -28,6 +28,7 @@
     "moduleDetection": "auto",
     "isolatedModules": false
   },
+
   "include": [
     "**/*.ts",
     "**/*.tsx"
