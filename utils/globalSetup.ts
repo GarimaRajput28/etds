@@ -1,6 +1,10 @@
 import { chromium, expect, Page } from "@playwright/test";
 import { etdsconfig } from "../ETDS.config";
+<<<<<<< Updated upstream
 import { Registration } from "../page/login/login";  //  use import, not require
+=======
+import { Registration } from "../page/login/login";  // ✅ use import, not require
+>>>>>>> Stashed changes
 
 async function globalSetup() {
   const browser = await chromium.launch({headless:true});
