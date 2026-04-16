@@ -1,6 +1,11 @@
 import { Page, Locator } from '@playwright/test';
 
 export class HomePage {
+    getNavMenuItems(): Locator {
+        return this.navBar.getByRole('menuitem');
+    }
+
+
     readonly page: Page;
     readonly tourDialog: Locator;
     readonly closeTourBtn: Locator;
@@ -10,13 +15,18 @@ export class HomePage {
     //Announcement popup
     readonly announcemnt: Locator;
 
+
+    //── Header nav items ──────────────────────────────────────────────
+    readonly navBar: Locator;
+
     //header locators
+    readonly homeMenu: Locator;
     readonly aboutUsMenu: Locator;
     readonly taxlawsMenu: Locator;
-    readonly taxibformationMenu: Locator;
+    readonly taxInformationMenu: Locator;
     readonly taxeservicesMenu: Locator;
+    readonly mediaGalleryMenu: Locator;
 
-    //search box locators
 
 
     //Explore Menu locators
@@ -43,11 +53,20 @@ export class HomePage {
         //Announcemnt popup locator
         this.announcemnt = page.locator("//etds-prompters[@announcementspages='/home:home-page-announcements,/employees-corner:kms-home-page-announcements']//div[@class='etds-prompters-icon-wrapper']//*[name()='svg']")
 
-        //header menu locators
+        // Header nav bar
+        this.navBar = page.getByRole('navigation', { name: 'Main' });
+
+        // Home — selected/highlighted when on home page
+        this.homeMenu = page.getByRole('menuitem', { name: 'Home' });
+
+        // Dropdowns
         this.aboutUsMenu = page.getByRole('menuitem', { name: 'About Us' });
         this.taxlawsMenu = page.getByRole('menuitem', { name: 'Tax Laws & Rules' });
-        this.taxibformationMenu = page.getByRole('menuitem', { name: 'Tax Information & Services' });
-        this.taxeservicesMenu = page.getByRole('menuitem', { name: 'Tax Services' });
+
+        // Direct links
+        this.taxInformationMenu = page.getByRole('menuitem', { name: 'Tax Information & Services' });
+        this.taxeservicesMenu = page.getByRole('menuitem', { name: 'Tax e-Services' });
+        this.mediaGalleryMenu = page.getByRole('menuitem', { name: 'Media Gallery' });
 
 
         //Explore Menu locators
@@ -77,10 +96,11 @@ export class HomePage {
 
     async goto() {
         await this.page.goto('/web/guest/home', { waitUntil: 'domcontentloaded' });
-        await this.aboutUsMenu.waitFor({ state: 'visible' });
+        await this.homeMenu.waitFor({ state: 'visible' });
 
 
     }
+
 
 
     async handleTour() {
@@ -98,25 +118,31 @@ export class HomePage {
         }
     }
 
+
+    // Checks whether a menu item has a dropdown (aria-haspopup or aria-expanded)
+    async isDropdown(menuItem: Locator): Promise < boolean > {
+    const hasPopup = await menuItem.getAttribute('aria-haspopup');
+    const expanded = await menuItem.getAttribute('aria-expanded');
+    return hasPopup !== null || expanded !== null;
+}
+
+
     async hoverFaceCard(card: Locator) {
-        const isFlipped = await card.evaluate(
-            (el: HTMLElement) => el.classList.contains('is-flipped')
-        );
-        if (isFlipped) {
-            await card.click();
-            await card.waitFor({ state: 'visible' });
-        }
-        await card.hover();
+    const isFlipped = await card.evaluate(
+        (el: HTMLElement) => el.classList.contains('is-flipped')
+    );
+    if (isFlipped) {
+        await card.click();
+        await card.waitFor({ state: 'visible' });
     }
-
-
+    await card.hover();
+}
 
 
     async clickOnInfographicalVideo() {
-        await this.infographicalBttn.waitFor({ state: 'visible', timeout: 10000 });
-        await this.infographicalBttn.click();
+    await this.infographicalBttn.waitFor({ state: 'visible', timeout: 10000 });
+    await this.infographicalBttn.click();
 
-
-    }
+}
 
 }
