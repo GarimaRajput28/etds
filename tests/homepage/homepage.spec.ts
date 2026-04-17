@@ -102,4 +102,7 @@ test('@fullTesting link redirection', async ({ homePage, page }) => {
     await homePage.taxlawsMenu.click();
 });
 
+test('@Sanity validate footer links', async ({ homePage }) => {
 
+    await expect(homePage.incomeTaxicon).toBeVisible({ timeout: 15000 });
+});

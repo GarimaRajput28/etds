@@ -33,9 +33,10 @@ export class HomePage {
     readonly infographicalBttn: Locator;
     readonly importantlinksBttn: Locator;
 
+    readonly incomeTaxicon: Locator;
+
 
     //Face card locators
-
 
     constructor(page: Page) {
         this.page = page;
@@ -74,6 +75,10 @@ export class HomePage {
         this.importantlinksBttn = page.getByRole('navigation', { name: 'Explore' }).getByRole('button', { name: 'Important Links', exact: true });
         this.popupContinueBtn = page.getByRole('button', { name: 'Continue' });
 
+
+        //Footer links 
+        this.incomeTaxicon =page.getByRole('img', { name: 'Government of India logo' });
+
     }
 
     // Returns a locator for a specific face card by its heading name
@@ -93,6 +98,7 @@ export class HomePage {
         }
         return cards;
     }
+
 
     async goto() {
         await this.page.goto('/web/guest/home', { waitUntil: 'domcontentloaded' });
@@ -144,5 +150,7 @@ export class HomePage {
     await this.infographicalBttn.click();
 
 }
+
+
 
 }
