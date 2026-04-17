@@ -5,7 +5,8 @@ Environment : {
     
 SIT_URL: "https://liferay-cluster-ip-service-liferay-test.apps.nonprod.tdscpc.gov.in/",
 DEV_URL: "http://liferay-cluster-ip-service-liferay.apps.nonprod.tdscpc.gov.in/",
-UAT_URL: "https://liferay-cluster-ip-service-liferay-uat.apps.nonprod.tdscpc.gov.in/"
+UAT_URL: "https://liferay-cluster-ip-service-liferay-uat.apps.nonprod.tdscpc.gov.in/",
+prod_url: "https://www.incometaxindia.gov.in/"
     },
 
     userscredential : {
