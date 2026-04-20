@@ -13,6 +13,10 @@ test('actPage', async ({ page }) => {
 
         
         await actPage.selectYear('2025');
+        await expect(actPage.page.getByText(/939 Section/)).toBeVisible({ timeout: 10000 });
+
+        
+
 
 
 
@@ -24,6 +28,11 @@ test('actPage', async ({ page }) => {
 
         await actPage.viewbtn.waitFor({ state: 'visible', timeout: 15000 });
         await actPage.viewbtn.click();
+
+        await actPage.showchnagesbtn.waitFor({ state: 'visible', timeout: 15000 });
+        await actPage.showchnagesbtn.check();
+
+        await expect(actPage.page.locator('div._toolbar_14x24_14:visible')).toBeVisible({ timeout: 10000 });
 
 
 });

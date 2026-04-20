@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { etdsconfig } from '../../ETDS.config';
 import { Registration } from '../../page/login/login';
 
-test.skip('login', async ({ page }) => {
+test('login', async ({ page }) => {
  const authentication = new Registration(page);
 
  test.step ("navigate to login page", async()=>{

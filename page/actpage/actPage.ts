@@ -4,33 +4,35 @@ export class ActPage {
     readonly page: Page;
     readonly incomeTaxHeading: Locator;
     readonly yearDropdown: Locator;
-    readonly yearOption2025: Locator;
     readonly sections1Link: Locator;
     readonly compareSection1Bttn: Locator;
     readonly modalHeading: Locator;
     readonly selectSectionOption: Locator;
-    readonly section5Option:     Locator;
+    readonly section5Option: Locator;
     readonly viewbtn: Locator;
- 
-    
+    readonly showchnagesbtn: Locator;
+
+
 
 
     constructor(page: Page) {
         this.page = page;
         this.incomeTaxHeading = page.getByRole('main').getByRole('heading', { name: 'Income-tax Act, 1961' });
-        this.yearDropdown =  page.getByLabel('As amended by Finance Act');
-        this.yearOption2025 = page.getByRole('option', { name: '2025', exact: true });
-        this.sections1Link =  page.locator('span').filter({ hasText: 'Section - 1' }).first();
+        this.yearDropdown = page.getByLabel('As amended by Finance Act');
+        this.sections1Link = page.locator('span').filter({ hasText: 'Section - 1' }).first();
         this.compareSection1Bttn = page.locator("//button[@aria-label='Compare for Section - 1']//span[@class='text'][normalize-space()='Compare']");
-        this.modalHeading    = page.getByRole('heading', {name: 'Section - 1 Short title, extent and commencement | Income-tax Act, 1961'});
+        this.modalHeading = page.getByRole('heading', { name: 'Section - 1 Short title, extent and commencement | Income-tax Act, 1961' });
 
-        
+
         //this.selectSectionOption   = page.getByRole('dialog').locator("//div[@class='etds-select__value-container css-hlgwow']//div[@class='etds-select__input-container css-19bb58m']");
         this.selectSectionOption = page.getByLabel('Section *')
 
-        this.section5Option   = page.getByRole('option', { name: 'Section - 5', exact: true });
+        this.section5Option = page.getByRole('option', { name: 'Section - 5', exact: true });
 
-        this.viewbtn =page.getByRole('dialog').getByRole('button', { name: 'View' });
+        this.viewbtn = page.getByRole('dialog').getByRole('button', { name: 'View' });
+        this.showchnagesbtn = page.getByRole('dialog').getByRole('checkbox', { name: /Show Changes/ });
+
+
     }
 
 
@@ -38,28 +40,31 @@ export class ActPage {
     async goto() {
         await this.page.goto('/income-tax-act-1961', { waitUntil: 'domcontentloaded' });
         await this.incomeTaxHeading.waitFor({ state: 'visible', timeout: 15000 });
-        
 
-     }
+
+    }
 
 
 
     async selectYear(year: string) {
 
         await this.yearDropdown.click();
-        
-        /* Step 2: Click the year dropdown */
-        await this.yearOption2025.waitFor({ state: 'visible' });        
-        /* Step 3: Click the 2025 option */
-        await this.yearOption2025.click();
+
+        const option = this.page.getByRole('listbox')
+            .getByRole('option', { name: year, exact: true });
+        await option.waitFor({ state: 'visible', timeout: 10000 });
+        await option.click();
+
+        await this.page.waitForLoadState('networkidle');
+
     }
 
-  
+
 
     async clickSection1() {
         /*wait for the sections to be visible and click on Section - 1*/
         await this.sections1Link.waitFor({ state: 'visible' });
-        
+
     }
 
 
@@ -76,9 +81,9 @@ export class ActPage {
         await this.section5Option.click();
 
 
-        
 
-       
+
+
     }
 
 
@@ -86,5 +91,8 @@ export class ActPage {
 
         await this.page.getByTitle('Section - 1 Short title, extent and commencement | Income-tax Act, 1961').waitFor({ state: 'visible', timeout: 15000 });
         await this.page.getByTitle('Section - 5 Short title, extent and commencement | Income-tax Act, 1961').waitFor({ state: 'visible', timeout: 15000 });
-}
+    }
+
+
+
 }

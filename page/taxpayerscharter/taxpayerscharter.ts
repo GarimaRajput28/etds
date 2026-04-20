@@ -33,7 +33,8 @@ export class TaxpayerCharter
 
          // Save file to your system
          await download.saveAs('downloads/taxpayer-charter.pdf');*/
-       await this.page.locator('iframe[name="DC8DA4330BB04DF98F22AC2468B0FC69"]').contentFrame().getByRole('button', { name: 'Download' }).click();
+       //await this.page.locator('iframe[name="DC8DA4330BB04DF98F22AC2468B0FC69"]').contentFrame().getByRole('button', { name: 'Download' }).click();
      }
+
 
 }

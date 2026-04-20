@@ -10,7 +10,7 @@ export class TaxpayerCharterReports
       async selectFinancialYear()
       {
           await this.page.locator('.etds-select__input-container').click();
-          await this.page.getByRole('option', { name: '-25' }).click();
+          await this.page.getByRole('option', { name: '2024-25' }).click();
 
       }
       async searchButtonClick()
