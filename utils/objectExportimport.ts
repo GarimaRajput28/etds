@@ -35,17 +35,19 @@ try{
 
 
  let filename : string | undefined  
-    if (actionbutton ==='Generate Object Template' || 'Export Object Entry'){
+    if (actionbutton ==='Generate Object Template' || actionbutton ==='Export Object Entry'){
         const downloadPromise = page.waitForEvent('download')
         await expect(Targetbutton).toBeVisible();
        await (Targetbutton).click();
        const downloadffile = await downloadPromise;
        filename = downloadffile.suggestedFilename();
+       const filepath = `./Downloads/${filename}`
+       await downloadffile.saveAs(filepath)
+       return filepath
 
     
         
     }
-    return filename; 
     } 
 catch(err){
 console.error(`Failed to select dropdown values:`, err)

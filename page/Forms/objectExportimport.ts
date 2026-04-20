@@ -2,6 +2,7 @@ import { expect,Page,Locator } from "@playwright/test";
 import { objectExportimport } from "../../utils/objectExportimport";
 import { globalMenu } from "../../utils/globalMenu";
 import { SrvRecord } from "node:dns";
+import {extractexceldata} from "../../utils/excelreader";
 
 
 class exportObjectEntry {
@@ -68,7 +69,7 @@ async exportObjectEntry(
     ObjectTypeValue : string,
     actionbutton : string,
     EntityTypeValue? : string,){
-    const filename = await objectExportimport({
+    const filepath = await objectExportimport({
        page: this.page,
         ObjectTypeDropdown: this.ObjectTypeDropdown,
         EntityTypeDropdown: this.EntityTypeDropdown,
@@ -77,7 +78,11 @@ async exportObjectEntry(
         actionbutton: actionbutton,
         Targetbutton: this.DownloadExportObjectTemplate
     })
-    console.log(filename);
+
+    if (filepath){
+        await extractexceldata(filepath,"Template")
+    }
+    
 }
 
 
