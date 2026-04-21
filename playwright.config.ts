@@ -29,7 +29,7 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
 
-  globalSetup : "./utils/globalSetup.ts",
+  //globalSetup : "./utils/globalSetup.ts",
   timeout: 120000,
   expect:{
     timeout : 30000
@@ -37,7 +37,7 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
-    baseURL : "https://liferay-cluster-ip-service-liferay-uat.apps.nonprod.tdscpc.gov.in/",
+    baseURL : "https://www.incometaxindia.gov.in/home",
     navigationTimeout : 90000,
     actionTimeout : 30000,
 
@@ -45,7 +45,7 @@ export default defineConfig({
     trace: 'on-first-retry',
     //headless : false,
     headless: process.env.CI ? true : false,
-    storageState: "auth.json",
+   // storageState: "auth.json",
 
   },
   
