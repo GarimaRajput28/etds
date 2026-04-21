@@ -1,11 +1,12 @@
 import { test, expect } from '@playwright/test';
 import { etdsconfig } from '../../ETDS.config';
 import { Registration } from '../../page/login/login';
+import { GuideTourPage } from '../../page/homepage/guidedTour';
 
 test('login', async ({ page }) => {
  const authentication = new Registration(page);
 
- test.step ("navigate to login page", async()=>{
+ test.step("navigate to login page", async()=>{
  await page.goto(`/login`,{ waitUntil: 'domcontentloaded'})
  })
  

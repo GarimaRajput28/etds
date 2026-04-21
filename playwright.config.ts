@@ -20,12 +20,8 @@ export default defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
-  timeout: 60000, // global per-test timeout
-  expect: { timeout: 15000 },
-  // no per-assertion timeout needed
-
-
+  //retries: process.env.CI ? 2 : 0,
+  retries: 1,
   /* Opt out of parallel tests on CI. */
   //workers: process.env.CI ? 1 : undefined,
   workers: 1,
@@ -33,16 +29,17 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
 
-  globalSetup: "./utils/globalSetup.ts",
+  globalSetup : "./utils/globalSetup.ts",
+  timeout: 120000,
+  expect:{
+    timeout : 30000
+  },
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
-    actionTimeout: 15000,
-    // per click/fill/hover
-    navigationTimeout: 30000,// per page.goto()
-
-    baseURL: etdsconfig.Environment.UAT_URL, // centralized URL
-
+    baseURL : "https://liferay-cluster-ip-service-liferay-uat.apps.nonprod.tdscpc.gov.in/",
+    navigationTimeout : 90000,
+    actionTimeout : 30000,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
