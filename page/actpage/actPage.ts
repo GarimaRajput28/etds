@@ -11,6 +11,7 @@ export class ActPage {
     readonly section5Option: Locator;
     readonly viewbtn: Locator;
     readonly showchnagesbtn: Locator;
+    readonly showchangespanel: Locator;
 
 
 
@@ -31,6 +32,7 @@ export class ActPage {
 
         this.viewbtn = page.getByRole('dialog').getByRole('button', { name: 'View' });
         this.showchnagesbtn = page.getByRole('dialog').getByRole('checkbox', { name: /Show Changes/ });
+        this.showchangespanel = page.getByText('Show Changes', { exact: true });
 
 
     }

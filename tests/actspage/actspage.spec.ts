@@ -32,7 +32,8 @@ test('actPage', async ({ page }) => {
         await actPage.showchnagesbtn.waitFor({ state: 'visible' });
         await actPage.showchnagesbtn.check();
 
-        await expect(actPage.page.locator('div._toolbar_14x24_14:visible')).toBeVisible();
+        await expect(actPage.showchangespanel).toBeVisible();
+
 
 
 });
