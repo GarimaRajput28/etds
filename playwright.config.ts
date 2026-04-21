@@ -48,7 +48,7 @@ export default defineConfig({
     storageState: "auth.json",
 
   },
-
+  
   /* Configure projects for major browsers */
   projects: [
     {

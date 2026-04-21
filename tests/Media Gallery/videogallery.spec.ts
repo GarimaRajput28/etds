@@ -1,7 +1,7 @@
 import { test, expect } from '../../Fixtures/commonsteps';
 import { AdvertisementGallery } from '../../page/Media Gallery/advertisementgallery';
 import { VideoGallery } from '../../page/Media Gallery/videogallery';
-test("advertisement gallery selection2", async ({ defaultPage }) => {
+test("video gallery selection", async ({ defaultPage }) => {
   const agallery = new AdvertisementGallery(defaultPage);
   const vgallery = new VideoGallery(defaultPage);
   await agallery.mediaGallerySelection1();
@@ -9,4 +9,6 @@ test("advertisement gallery selection2", async ({ defaultPage }) => {
   await vgallery.videoGalleryYearDropdown();
   await vgallery.videoGalleryYearSelection();
   await agallery.searchButtonSelection();
+  await vgallery.videoSelection();
+  await vgallery.clickVideoPlayButton;
 });

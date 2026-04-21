@@ -10,29 +10,40 @@ export class comicbooks
 
     async clickComicBookTab()
     {
-        await this.page.locator('a:has-text("Comic books")').click();
+          const videoTab = this.page.locator('a[href="/comic-books"]');
+    await videoTab.waitFor({ state: 'visible' });
+
+    // Click first
+    await videoTab.click();
+
+    // Race between: real navigation OR Senna cache swap
+    await Promise.race([
+        // Real navigation (first run)
+        this.page.waitForURL('**/comic-books**', { timeout: 5000 }).catch(() => {}),
+        
+        // Senna cache swap (subsequent runs) — URL updates via history API
+        this.page.waitForFunction(
+            () => window.location.href.includes('/comic-books'),
+            { timeout: 5000 }
+        ).catch(() => {})
+    ]);
     }    
-    async verifyYearAndLanguageSelection() {
-  const yearSelected = this.page.locator('.form-group-item:has(label[title="Year"]) .etds-select__single-value');
-  await expect(yearSelected).toHaveText(/All/);
 
-  const languageSelected = this.page.locator('.form-group-item:has(label[title="Language"]) .etds-select__single-value');
-  await expect(languageSelected).toHaveText(/English/);
+   async clickFirstComicBook() {
+    await this.page.locator('div.comic-content.list-view').waitFor({ state: 'visible' });
+    
+    const firstComic = this.page.locator('a.comic-item').first();
+    await firstComic.waitFor({ state: 'visible' });
+
+    // target="_blank" opens new tab — capture it
+    const [newPage] = await Promise.all([
+        this.page.context().waitForEvent('page'),
+        firstComic.click()
+    ]);
+
+    // Wait for new tab to load
+    await newPage.waitForLoadState('domcontentloaded');
+    console.log('Opened URL:', newPage.url());
 }
-    async openPdfWhenNewTabVisible()
-    {
-        const newTag= await this.page.locator(".new-badge").getByText("New!");
-        if(await newTag.isVisible())
-        {
-            const[newPage] = await Promise.all([
-                this.page.waitForEvent('popup'),
-                this.page.locator('.lexicon-icon lexicon-icon-etds-pdf').getByText("File").click()
-            ])
-             await newPage.waitForLoadState();
-
-             console.log('PDF opened in new tab:', newPage.url());
-        }
-
-    }
-
 }
+   

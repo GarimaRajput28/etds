@@ -15,11 +15,11 @@ export class AdvertisementGallery {
   async typeSearchKeyword()
   {
     await this.page.getByPlaceholder('Type to Search').click();
-    await this.page.getByPlaceholder('Type to Search').fill('Last date of Filing of TDS statement');
+    await this.page.getByPlaceholder('Type to Search').fill('Advance Tax');
   }
   async searchButtonSelection()
   {
-    await this.page.locator('#portlet_com_liferay_client_extension_web_internal_portlet_ClientExtensionEntryPortlet_75024455507050_LXC_etds_publicity_campaigns_INSTANCE_dpkf').getByRole('button', { name: 'Search' }).click();
+    await this.page.locator("//button[contains(text(),'Search')]").click();
   }
   async shareButton()
   {
