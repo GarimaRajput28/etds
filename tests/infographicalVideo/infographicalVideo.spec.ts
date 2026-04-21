@@ -3,19 +3,35 @@ import { InfographicalVideoPage } from '../../page/infographicalVideo/infographi
 
 test('Redirection to infographical page from Homepage', async ({ homePage, page }) => {
 
-    // Step 1: Verify button exists on homepage
+    // Navigate from homepage via Explore menu
     await homePage.clickOnInfographicalVideo();
-    await expect(homePage.infographicalBttn).toBeVisible({ timeout: 15000 });
-    // Step 2: Click the button to navigate to infographical video page
+
+    const videoPage = new InfographicalVideoPage(page);
+
+    // 1. Verify page loaded
+    await videoPage.verifyPageLoaded();
+
+    // 2. Select "All" years — works across all environments regardless of data
+    await videoPage.selectAllYears();
+
+    // 3. Play the first available video
+    await videoPage.playFirstVideo();
+
+    // 4. Verify player opened
+    await videoPage.verifyVideoIsPlaying();
+
+    await expect(videoPage.videoPlayer).toBeVisible();
+
+    await expect(videoPage.VideoPageHeading).toBeVisible();
+
+    await expect(videoPage.playButton).toBeVisible();
+
+  //click on play button to check if video is playing
+    await videoPage.playButton.click();
     
-    // page.waitForTimeout(1500);
-
-    await homePage.infographicalBttn.click();
 
     
+    await videoPage.closeButton.click();
 
-    // Step 3: Verify destination page heading
-    const infographicalPage = new InfographicalVideoPage(page);
-    await infographicalPage.verifyPageloaded();
-    await expect(infographicalPage.heading).toBeVisible();
-})
+
+});

@@ -39,7 +39,7 @@ export class ActPage {
 
     async goto() {
         await this.page.goto('/income-tax-act-1961', { waitUntil: 'domcontentloaded' });
-        await this.incomeTaxHeading.waitFor({ state: 'visible', timeout: 15000 });
+        await this.incomeTaxHeading.waitFor({ state: 'visible' });
 
 
     }
@@ -52,7 +52,7 @@ export class ActPage {
 
         const option = this.page.getByRole('listbox')
             .getByRole('option', { name: year, exact: true });
-        await option.waitFor({ state: 'visible', timeout: 10000 });
+        await option.waitFor({ state: 'visible' });
         await option.click();
 
         await this.page.waitForLoadState('networkidle');
@@ -89,8 +89,8 @@ export class ActPage {
 
     async viewComparison() {
 
-        await this.page.getByTitle('Section - 1 Short title, extent and commencement | Income-tax Act, 1961').waitFor({ state: 'visible', timeout: 15000 });
-        await this.page.getByTitle('Section - 5 Short title, extent and commencement | Income-tax Act, 1961').waitFor({ state: 'visible', timeout: 15000 });
+        await this.page.getByTitle('Section - 1 Short title, extent and commencement | Income-tax Act, 1961').waitFor({ state: 'visible' });
+        await this.page.getByTitle('Section - 5 Short title, extent and commencement | Income-tax Act, 1961').waitFor({ state: 'visible' });
     }
 
 
