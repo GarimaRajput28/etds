@@ -42,7 +42,7 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
-    baseURL : "https://www.incometaxindia.gov.in/home",
+    baseURL : "https://liferay-cluster-ip-service-liferay-uat.apps.nonprod.tdscpc.gov.in/home",
     navigationTimeout : 90000,
     actionTimeout : 30000,
 

@@ -7,11 +7,11 @@ export class InfographicalVideoPage {
     readonly yearDropdown: Locator;
     readonly firstVideo: Locator;
     readonly videoPlayer: Locator;
-    readonly VideoPageHeading: Locator; 
+    readonly VideoPageHeading: Locator;
     readonly playButton: Locator;
     readonly closeButton: Locator;
 
-    
+
 
     constructor(page: Page) {
         this.page = page;
@@ -32,15 +32,14 @@ export class InfographicalVideoPage {
 
         //heading on Video player dialog
 
-        this.VideoPageHeading = page.getByRole('dialog')
-        .getByRole('heading', { name: 'Video Player' });
+        this.VideoPageHeading = page.getByRole('dialog').getByRole('heading', { name: 'Video Player' });
 
         this.playButton = page.locator('#senna_surface1');
         this.closeButton = page.locator("//button[@id='btn-video-modal-close']//*[name()='svg']");
 
     }
 
-    
+
 
     async verifyPageLoaded() {
         await this.heading.waitFor({ state: 'visible' });
@@ -49,9 +48,27 @@ export class InfographicalVideoPage {
 
     // Selects "All" from year dropdown to show videos across all years
     async selectAllYears() {
-        await this.yearDropdown.click();
 
-        const allOption = this.page.getByRole('option', { name: 'All', exact: true });
+
+        // Click the visible dropdown trigger — the generic "Year" div, not the hidden input
+        const yearTrigger = this.page
+            .getByRole('region', { name: 'Search' })
+            .locator('[class*="etds-select__control"]')
+            .first();
+
+        await yearTrigger.click();
+
+        // Now options will render — wait for the menu to open
+        const optionsMenu = this.page.locator('div.etds-select__input-container.css-19bb58m:visible');
+        await optionsMenu.waitFor({ state: 'visible'});
+
+
+       // Click the "All" option to show videos from all years 
+        const allOption = this.page
+            .locator('[class*="etds-select__option"]').filter({ hasText: /^All$/ }).first();
+
+
+
 
         await allOption.waitFor({ state: 'visible' });
         await allOption.click();
@@ -61,15 +78,15 @@ export class InfographicalVideoPage {
     }
 
     async playFirstVideo() {
-        await this.firstVideo.waitFor({ state: 'visible'});
+        await this.firstVideo.waitFor({ state: 'visible' });
         await this.firstVideo.click();
     }
 
     async verifyVideoIsPlaying() {
-        await this.videoPlayer.waitFor({ state: 'visible'});
-        
-        
-        
+        await this.videoPlayer.waitFor({ state: 'visible' });
+
+
+
 
     }
 }
