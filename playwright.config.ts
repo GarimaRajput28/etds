@@ -13,6 +13,9 @@ import { etdsconfig } from './ETDS.config';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
+
+
+
 export default defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
@@ -29,11 +32,13 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
 
-  globalSetup : "./utils/globalSetup.ts",
+  //globalSetup : "./utils/globalSetup.ts",
   timeout: 120000,
   expect:{
     timeout : 30000
   },
+
+
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',

@@ -1,6 +1,8 @@
 import { test, expect } from '../../Fixtures/popuphandling.fixtures';
 import { InfographicalVideoPage } from '../../page/infographicalVideo/infographicalVideo';
 
+
+
 test('Redirection to infographical page from Homepage', async ({ homePage, page }) => {
 
     // Navigate from homepage via Explore menu

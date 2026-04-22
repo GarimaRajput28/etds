@@ -1,5 +1,6 @@
 import { Page, Locator, expect } from '@playwright/test';
 
+
 export class ActPage {
     readonly page: Page;
     readonly incomeTaxHeading: Locator;
