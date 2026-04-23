@@ -21,8 +21,7 @@ export class InfographicalVideoPage {
         this.yearDropdown = page.getByLabel('Year');
 
         // Matches any video button regardless of label — env-safe
-        this.firstVideo = page
-            .getByRole('region', { name: 'etds-infographical-videos' })
+        this.firstVideo = page.getByRole('region', { name: 'etds-infographical-videos' })
             .getByRole('button', { name: /^Video:/ }).first();
 
         // Player that appears after clicking a video
@@ -52,25 +51,16 @@ export class InfographicalVideoPage {
 
         // Click the visible dropdown trigger — the generic "Year" div, not the hidden input
         const yearTrigger = this.page
-            .getByRole('region', { name: 'Search' })
-            .locator('[class*="etds-select__control"]')
+            .getByRole('region', { name: 'Search' }).locator('[class*="etds-select__control"]')
             .first();
 
+
+        await yearTrigger.waitFor({ state: 'visible', timeout: 10000 });
         await yearTrigger.click();
 
-        // Now options will render — wait for the menu to open
-        const optionsMenu = this.page.locator('div.etds-select__input-container.css-19bb58m:visible');
-        await optionsMenu.waitFor({ state: 'visible'});
 
-
-       // Click the "All" option to show videos from all years 
-        const allOption = this.page
-            .locator('[class*="etds-select__option"]').filter({ hasText: /^All$/ }).first();
-
-
-
-
-        await allOption.waitFor({ state: 'visible' });
+        // Click the "All" option to show videos from all years 
+        const allOption = this.page.locator('[class*="etds-select__option"]').filter({ hasText: /^All$/ }).first();
         await allOption.click();
 
         // Wait for the video list to refresh
