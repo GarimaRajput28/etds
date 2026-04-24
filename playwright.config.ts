@@ -32,7 +32,7 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
 
-  globalSetup : "./utils/globalSetup.ts",
+  //globalSetup : "./utils/globalSetup.ts",
   timeout: 120000,
   expect:{
     timeout : 30000
