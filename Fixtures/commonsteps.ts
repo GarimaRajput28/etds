@@ -10,7 +10,7 @@ export const test = baseTest.extend<MyFixtures>({
     defaultPage: async ({ page }, use) => {
 
         // Navigate using centralized URL from ETDS.config — no hardcoding needed
-        await page.goto(etdsconfig.Environment.prod_url, { waitUntil: 'domcontentloaded' });
+        await page.goto(etdsconfig.Environment.UAT_URL, { waitUntil: 'domcontentloaded' });
 
         // Handle guided tour if it appears — using waitFor instead of isVisible
         // so it properly waits rather than immediately returning false

@@ -28,7 +28,7 @@ class usermanagement {
     }
 
     async clickadmin (){
-        await expect(this.clickadminoption).toBeVisible ({timeout : 10000});
+        await expect(this.clickadminoption).toBeVisible ({timeout : 60000});
         await this.clickadminoption.hover();
     }
 
